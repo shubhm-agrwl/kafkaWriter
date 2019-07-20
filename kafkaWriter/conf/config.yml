@@ -1,0 +1,29 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 12082
+  adminConnectors:
+  - type: http
+    port: 12083
+  requestLog:
+    type: external
+
+logging:
+    type: external
+    
+kafkaQueueName: pre-prod-ABC
+
+kafkaProducerConfig:
+    bootstrap.servers: localhost:9092
+    client.id: transporter_analytics_producer_grp_1
+    key.serializer: org.apache.kafka.common.serialization.LongSerializer
+    value.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+authServerConfig:
+    authEnabled: true
+    authServerHost: localhost
+    authServerPort: 8092
+    authServerURL: http://%s:%s/transporter/auth/v1/login
+    authUserName: apitest
+    authPassword: apipassword
+    expiryInterval: 10
